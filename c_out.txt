@@ -1,0 +1,207 @@
+=== Conversation 1: Happy Path & KB ===
+USER: Hello!
+  [FSM] State.GREETING → State.INTENT_DISCOVERY  (turn 1)
+BOT: Hello! 👋
+
+I can help you with:
+  • Tracking your order
+  • Cancelling an order
+  • Billing enquiries
+
+What would you like to do?
+
+USER: What's the delivery time?
+  [FSM] State.INTENT_DISCOVERY → State.INTENT_DISCOVERY  (turn 2)
+BOT: Understood! Our standard delivery time is 5-7 business days depending on your location.
+
+Do you need help with anything else?
+
+USER: Okay, track my order
+  [FSM] State.INTENT_DISCOVERY → State.SLOT_FILLING  (turn 3)
+BOT: Absolutely ✨ Could you tell me your order ID?
+
+USER: 1234
+  [FSM] State.SLOT_FILLING → State.CLOSURE  (turn 4)
+BOT: No worries! Good news! Your order 📦 #1234 is 'Shipped'. It should arrive by March 23, 2026.
+
+Do you need help with anything else?
+
+USER: no
+  [FSM] State.CLOSURE → State.GREETING  (turn 0)
+BOT: Thank you for contacting Cervic Support! Have a great day 😊
+
+--------------------------------------------------
+=== Conversation 2: Emotional (Angry) & Cancellations ===
+USER: I am so angry right now this is terrible!
+  [FSM] State.GREETING → State.INTENT_DISCOVERY  (turn 1)
+BOT: Greetings! 👋
+
+I can help you with:
+  • Tracking your order
+  • Cancelling an order
+  • Billing enquiries
+
+How can I assist you today?
+
+USER: cancel order 9999
+  [FSM] State.INTENT_DISCOVERY → State.CLOSURE  (turn 2)
+BOT: Understood! We cannot cancel order #9999 because it was already delivered. Try a return request.
+
+Do you need help with anything else?
+
+USER: what about 4321
+  [FSM] State.CLOSURE → State.CLOSURE  (turn 3)
+BOT: Do you need help with anything else? (yes / no)
+
+USER: fine cancel 5678
+  [FSM] State.CLOSURE → State.INTENT_DISCOVERY  (turn 4)
+BOT: Do you want to:
+ 1. Track order
+ 2. Cancel order
+ 3. Check billing?
+
+USER: no
+  [FSM] State.INTENT_DISCOVERY → State.INTENT_DISCOVERY  (turn 5)
+BOT: Let me know if you need to track a package, cancel one, or review billing details.
+
+--------------------------------------------------
+=== Conversation 3: Emotional (Happy) & Billing ===
+USER: hey there
+  [FSM] State.GREETING → State.INTENT_DISCOVERY  (turn 1)
+BOT: Hello! Welcome to Cervic Support 👋
+
+I can help you with:
+  • Tracking your order
+  • Cancelling an order
+  • Billing enquiries
+
+What would you like to do?
+
+USER: I'm really happy with your service, amazing!
+  [FSM] State.INTENT_DISCOVERY → State.INTENT_DISCOVERY  (turn 2)
+BOT: Are you looking to manage an existing order?
+
+USER: check billing for order 1111
+  [FSM] State.INTENT_DISCOVERY → State.CLOSURE  (turn 3)
+BOT: Sure! Billing Details 💳 (Order #1111):
+Status: Paid
+Email Address: user4@email.com
+
+Do you need help with anything else?
+
+USER: no
+  [FSM] State.CLOSURE → State.GREETING  (turn 0)
+BOT: Thank you for contacting Cervic Support! Have a great day 😊
+
+--------------------------------------------------
+=== Conversation 4: Ambiguous Input & Validation ===
+USER: hello
+  [FSM] State.GREETING → State.INTENT_DISCOVERY  (turn 1)
+BOT: Hey! ✨
+
+I can support you by:
+  • Tracking your shipment
+  • Canceling an existing order
+  • Looking up billing info
+
+How can I assist you today?
+
+USER: asdfsdfsd
+  [FSM] State.INTENT_DISCOVERY → State.INTENT_DISCOVERY  (turn 2)
+BOT: Would you like help tracking your order, or perhaps checking your billing?
+
+USER: wait tracking
+  [FSM] State.INTENT_DISCOVERY → State.INTENT_DISCOVERY  (turn 3)
+BOT: Do you want to:
+ 1. Track order
+ 2. Cancel order
+ 3. Check billing?
+
+USER: 12
+  [FSM] State.INTENT_DISCOVERY → State.INTENT_DISCOVERY  (turn 4)
+BOT: Would you like help tracking your order, or perhaps checking your billing?
+
+USER: 1234
+
+############################################################
+  🚨 ESCALATION TRIGGERED
+  Trigger  : fallback
+  Session  : 
+  Sentiment: 0.0
+  Intent   : small_talk
+  Topic    : Small Talk
+  Entities : {}
+  Slots    : {}
+  Turns    : 5
+  Stack    : []
+  FULL CONTEXT:
+{
+    "intent": "small_talk",
+    "intent_stack": [],
+    "entity_map": {},
+    "slot_fill_state": {},
+    "conversation_topic": "Small Talk",
+    "sentiment": 0.0,
+    "turn_count": 5,
+    "confidence": 0.65,
+    "pending_intent": null,
+    "disambiguating": false,
+    "retry_count": 0,
+    "fallback_count": 2,
+    "escalated": true,
+    "state": "INTENT_DISCOVERY",
+    "last_accessed": 1774203606.8845809,
+    "last_summary": "",
+    "options": [
+        "Track Order",
+        "Cancel Order",
+        "Check Billing"
+    ],
+    "clarification_state": true
+}
+############################################################
+
+  [FSM] State.INTENT_DISCOVERY → State.INTENT_DISCOVERY  (turn 5)
+BOT: 🔴 Connecting you to a human agent...
+We couldn't understand your request after multiple attempts.
+
+A support agent will be with you shortly. Your conversation context has been shared with them.
+
+USER: no
+  [FSM] State.INTENT_DISCOVERY → State.INTENT_DISCOVERY  (turn 6)
+BOT: That's a bit outside my expertise. Can I help you track, cancel, or check the billing for an order instead?
+
+--------------------------------------------------
+=== Conversation 5: Small Talk & Context Memory ===
+USER: how are you
+  [FSM] State.GREETING → State.INTENT_DISCOVERY  (turn 1)
+BOT: Greetings! 👋
+
+I can support you by:
+  • Tracking your shipment
+  • Canceling an existing order
+  • Looking up billing info
+
+What can I do for you today?
+
+USER: what can you do
+  [FSM] State.INTENT_DISCOVERY → State.INTENT_DISCOVERY  (turn 2)
+BOT: I'm geared to help with order tracking, cancellations, and billing inquiries.
+
+USER: track order 1234
+  [FSM] State.INTENT_DISCOVERY → State.CLOSURE  (turn 3)
+BOT: Got it! Good news! Your order 📦 #1234 is 'Shipped'. It should arrive by March 23, 2026.
+
+Do you need help with anything else?
+
+USER: cancel it
+  [FSM] State.CLOSURE → State.CLOSURE  (turn 4)
+BOT: Okay! ✅ Your cancellation for order #1234 was successful. A refund will be issued in 5-7 working days.
+
+Do you need help with anything else?
+
+USER: no
+  [FSM] State.CLOSURE → State.GREETING  (turn 0)
+BOT: Thank you for contacting Cervic Support! Have a great day 😊
+
+--------------------------------------------------

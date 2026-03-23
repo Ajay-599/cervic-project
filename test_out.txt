@@ -1,0 +1,12 @@
+--- KB INTERCEPT ---
+Bot:
+Sure! Our standard delivery time is 5-7 business days depending on your location.
+
+Do you need help with anything else?
+
+--- RESOLUTION ---
+Bot:
+Okay! Good news! Your order 📦 #1234 is 'Shipped'. It should arrive by March 23, 2026.
+
+Do you need help with anything else?
+
